@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RGmobile.Models;
+using RGmobile.Pages;
+using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +10,13 @@ namespace RGmobile
 {
     public partial class App : Application
     {
+        public static List<Product> ShoppingCart { get; set; } = new List<Product>();
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()

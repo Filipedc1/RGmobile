@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RGmobile.Pages.CollectionsPage"
+             Title="Products">
+
+    <ContentPage.Content>
+        <Grid>
+            <ListView SeparatorVisibility="None" HasUnevenRows="True" x:Name="LvCollection" ItemSelected="LvCollection_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <!--Binding with the propeties in the Collection class-->
+                                <Image Source="{Binding Image}" HeightRequest="200" Aspect="Fill"/>
+                                <BoxView BackgroundColor="Black" Opacity="0.4"/>
+                                <Label Text="{Binding Name}" FontSize="Large" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator x:Name="BusyIndicator" HorizontalOptions="Center" VerticalOptions="Center" Color="#FF5722" IsRunning="True"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
