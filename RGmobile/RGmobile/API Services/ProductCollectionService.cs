@@ -11,14 +11,14 @@ namespace RGmobile.API_Services
     public class ProductCollectionService
     {
         //Get Request
-        public async Task<List<ProductCollection>> GetProductCollections()
-        {
-            var client = new HttpClient();
+        //public async Task<List<ProductCollection>> GetProductCollections()
+        //{
+        //    var client = new HttpClient();
 
-            //send request to server. Server will send response back in JSON format
-            var response = await client.GetStringAsync("https://expresso-api.azurewebsites.net/api/Menus");
-            return JsonConvert.DeserializeObject<List<ProductCollection>>(response);
-        }
+        //    //send request to server. Server will send response back in JSON format
+        //    var response = await client.GetStringAsync("https://expresso-api.azurewebsites.net/api/Menus");
+        //    return JsonConvert.DeserializeObject<List<ProductCollection>>(response);
+        //}
 
         //Post Request
         //public async Task<bool> ReserveTable(Reservation reservation)

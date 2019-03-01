@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RGmobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -9,14 +10,24 @@ namespace RGmobile.API_Services
 {
     public class AccountService
     {
-        //Get Request
-        public async Task<string> Login()
+        //Post Request
+        public async Task<string> Login(LoginViewModel model)
         {
             var client = new HttpClient();
 
-            //send request to server. Server will send response back in JSON format
-            var response = await client.GetStringAsync("https://localhost:44308/api/User/login");
-            return JsonConvert.DeserializeObject<string>(response);
+            //send data to server in JSON format
+            string json = JsonConvert.SerializeObject(model);
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://rg-api.azurewebsites.net/api/User/login", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseValue = await response.Content.ReadAsStringAsync();
+                return responseValue;
+            }
+
+            return null;
         }
 
         //Post Request

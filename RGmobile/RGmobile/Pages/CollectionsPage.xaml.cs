@@ -35,12 +35,12 @@ namespace RGmobile.Pages
 
             if (first)
             {
-                var collections = await productCollectionService.GetProductCollections();
+                //var collections = await productCollectionService.GetProductCollections();
 
-                foreach (var collection in collections)
-                {
-                    ProductCollections.Add(collection);
-                }
+                //foreach (var collection in collections)
+                //{
+                //    ProductCollections.Add(collection);
+                //}
 
                 LvCollection.ItemsSource = ProductCollections;
                 BusyIndicator.IsRunning = false;

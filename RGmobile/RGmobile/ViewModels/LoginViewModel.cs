@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -44,16 +45,16 @@ namespace RGmobile.ViewModels
         public LoginViewModel()
         {
             _accountService = new AccountService();
-            LoginCommand = new Command(Login);
+            LoginCommand = new Command<LoginViewModel>(async (model) => await Login(model));
         }
 
         #endregion
 
         #region Methods
 
-        private async void Login()
+        private async Task Login(LoginViewModel model)
         {
-            var token = await _accountService.Login();
+            var token = await _accountService.Login(model);
         }
 
         #endregion
