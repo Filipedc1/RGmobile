@@ -54,7 +54,10 @@ namespace RGmobile.ViewModels
 
         private async Task Login(LoginViewModel model)
         {
-            var token = await _accountService.Login(model);
+            string token = await _accountService.Login(model);
+
+            if (string.IsNullOrEmpty(token))
+                await App.Current.MainPage.DisplayAlert("Error", "Please check your credentials", "Done");
         }
 
         #endregion
