@@ -1,4 +1,5 @@
 ﻿using RGmobile.API_Services;
+using RGmobile.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,48 +17,71 @@ namespace RGmobile.ViewModels
 
         private AccountService _accountService;
 
-        private string _username;
+
+        private bool isBusy = false;
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string username;
         public string UserName
         {
-            get { return _username; }
+            get { return username; }
             set
             {
-                _username = value;
+                username = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _password;
+        private string password;
         public string Password
         {
-            get { return _password; }
+            get { return password; }
             set
             {
-                _password = value;
+                password = value;
                 OnPropertyChanged();
+                LoginCommand.ChangeCanExecute(); //re-evaluates the command whenever isBusy is changed
             }
         }
 
-        public ICommand LoginCommand { get; private set; }
+        public Command LoginCommand { get; private set; }
 
         #region Constructor
 
         public LoginViewModel()
         {
             _accountService = new AccountService();
-            LoginCommand = new Command<LoginViewModel>(async (model) => await Login(model));
+            LoginCommand = new Command<LoginViewModel>(async (model) => await LoginAsync(model), 
+                                                             (model) => !IsBusy);
         }
 
         #endregion
 
         #region Methods
 
-        private async Task Login(LoginViewModel model)
+        private async Task LoginAsync(LoginViewModel model)
         {
+            IsBusy = true;
+
             string token = await _accountService.Login(model);
 
             if (string.IsNullOrEmpty(token))
-                await App.Current.MainPage.DisplayAlert("Error", "Please check your credentials", "Done");
+            {
+                IsBusy = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Invalid credentials", "Ok");
+                return;
+            }
+
+            IsBusy = false;
+            await App.Current.MainPage.Navigation.PushAsync(new HomePage());
         }
 
         #endregion

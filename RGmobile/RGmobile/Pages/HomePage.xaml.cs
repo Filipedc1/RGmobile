@@ -15,6 +15,7 @@ namespace RGmobile.Pages
         public HomePage ()
         {
             InitializeComponent();
+            //BindingContext = new HomeViewModel();
         }
     }
 }

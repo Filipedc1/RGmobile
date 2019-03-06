@@ -4,9 +4,7 @@
              xmlns:local="clr-namespace:RGmobile.ViewModels"
              x:Class="RGmobile.Pages.LoginPage">
 
-    <ContentPage.BindingContext>
-        <local:LoginViewModel/>
-    </ContentPage.BindingContext>
+
     
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="20" VerticalOptions="Center">
@@ -15,6 +13,7 @@
             <Button Text="Login" TextColor="White" BackgroundColor="#515151" 
                     Command="{Binding LoginCommand}" CommandParameter="{Binding .}">
             </Button>
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="#FF5722" IsRunning="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
