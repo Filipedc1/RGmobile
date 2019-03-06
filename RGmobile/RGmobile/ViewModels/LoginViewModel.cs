@@ -81,7 +81,7 @@ namespace RGmobile.ViewModels
             }
 
             IsBusy = false;
-            await App.Current.MainPage.Navigation.PushAsync(new HomePage());
+            await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
         }
 
         #endregion
