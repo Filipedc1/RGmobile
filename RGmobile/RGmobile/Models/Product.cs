@@ -6,11 +6,15 @@ namespace RGmobile.Models
 {
     public class Product
     {
-        public int Id                           { get; set; }
-        public string Name                      { get; set; }
-        public string Description               { get; set; }
-        public double Price                     { get; set; }
-        public string Image                     { get; set; }
-        public ProductCollection Collection     { get; set; }
+        public int ProductId        { get; set; }
+        public string Name          { get; set; }
+        public string Description   { get; set; }
+        public string ImageUrl      { get; set; }
+
+
+        public virtual IEnumerable<CustomerPrice> CustomerPrices { get; set; }
+        public virtual IEnumerable<SalonPrice> SalonPrices { get; set; }
+
+        public ICollection<CollectionProduct> CollectionProducts { get; set; }
     }
 }

@@ -22,10 +22,10 @@ namespace RGmobile.Pages
 			InitializeComponent();
             Products = new ObservableCollection<Product>();
 
-            foreach (var product in collection.Products)
-            {
-                Products.Add(product);
-            }
+            //foreach (var product in collection)
+            //{
+            //    Products.Add(product);
+            //}
 
             LvProducts.ItemsSource = Products;
         }

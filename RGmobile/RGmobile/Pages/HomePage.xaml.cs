@@ -12,9 +12,10 @@ namespace RGmobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : TabbedPage
     {
-        public HomePage ()
+        public HomePage (string token)
         {
             InitializeComponent();
+            //BindingContext = new HomeViewModel();
         }
     }
 }

@@ -1,9 +1,14 @@
 ﻿using RGmobile.API_Services;
+using RGmobile.Helpers;
+using RGmobile.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,46 +19,107 @@ namespace RGmobile.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private AccountService _accountService;
+        private UserService _userService;
 
-        private string _username;
+
+        private bool isBusy = false;
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string username;
         public string UserName
         {
-            get { return _username; }
+            get { return username; }
             set
             {
-                _username = value;
+                username = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _password;
+        private string password;
         public string Password
         {
-            get { return _password; }
+            get { return password; }
             set
             {
-                _password = value;
+                password = value;
                 OnPropertyChanged();
+                LoginCommand.ChangeCanExecute(); //re-evaluates the command whenever isBusy is changed
             }
         }
 
-        public ICommand LoginCommand { get; private set; }
+        public Command LoginCommand { get; private set; }
 
         #region Constructor
 
         public LoginViewModel()
         {
             _accountService = new AccountService();
-            LoginCommand = new Command(Login);
+            _userService = new UserService();
+            LoginCommand = new Command<LoginViewModel>(async (model) => await LoginAsync(model), 
+                                                             (model) => !IsBusy);
         }
 
         #endregion
 
         #region Methods
 
-        private async void Login()
+        private async Task LoginAsync(LoginViewModel model)
         {
-            var token = await _accountService.Login();
+            IsBusy = true;
+
+            string token = await _accountService.Login(model);
+
+            if (string.IsNullOrEmpty(token))
+            {
+                IsBusy = false;
+                await App.Current.MainPage.DisplayAlert("Login Failure", "Invalid credentials", "Ok");
+                return;
+            }
+
+            //await FinishLogin(token, model.UserName);
+
+            IsBusy = false;
+
+            await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
+        }
+
+        //Need to finish this later. Keep simple login for now and just build out the app.
+        public async Task FinishLogin(string access_token, string username)
+        {
+            Settings.AccessToken = access_token;
+
+            var decodedToken = new JwtSecurityToken(access_token);
+            var claims = decodedToken.Claims.ToList();
+
+            string expires = claims.FirstOrDefault(x => x.Type == "exp").Value;
+
+            long.TryParse(expires, out long time);
+            long nextTime = DateTime.Now.AddSeconds(time).Ticks;
+            Settings.KeyValidUntil = nextTime;
+
+            //try
+            //{
+            //    var user = await _userService.GetUserByUsername(username);
+            //    Settings.UserId = user.Id.ToString();
+            //    Settings.UserName = user.Name ?? string.Empty;
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+
+            //IsBusy = false;
+
+            //await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
         }
 
         #endregion
