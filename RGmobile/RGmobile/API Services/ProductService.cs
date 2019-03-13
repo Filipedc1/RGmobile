@@ -8,17 +8,26 @@ using System.Threading.Tasks;
 
 namespace RGmobile.API_Services
 {
-    public class ProductCollectionService
+    public class ProductService
     {
-        //Get Request
-        //public async Task<List<ProductCollection>> GetProductCollections()
-        //{
-        //    var client = new HttpClient();
+        private const string GetProductCollectionsUrl = @"https://rg-api.azurewebsites.net/api/Product/getproductcollections";
 
-        //    //send request to server. Server will send response back in JSON format
-        //    var response = await client.GetStringAsync("https://expresso-api.azurewebsites.net/api/Menus");
-        //    return JsonConvert.DeserializeObject<List<ProductCollection>>(response);
-        //}
+        //Get Request
+        public async Task<List<ProductCollection>> GetProductCollections()
+        {
+            var client = new HttpClient();
+
+            //send request to server. Server will send response back in JSON format
+            var response = await client.GetAsync(GetProductCollectionsUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseValue = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<ProductCollection>>(responseValue);
+            }
+
+            return null;
+        }
 
         //Post Request
         //public async Task<bool> ReserveTable(Reservation reservation)

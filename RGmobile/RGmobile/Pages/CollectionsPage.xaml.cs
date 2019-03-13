@@ -17,7 +17,7 @@ namespace RGmobile.Pages
 	public partial class CollectionsPage : ContentPage
 	{
         public ObservableCollection<ProductCollection> ProductCollections;
-        private ProductCollectionService productCollectionService;
+        private ProductService _productService;
 
         //using this to prevent api to get called everytime you click Menus tab
         public static bool first = true;
@@ -26,7 +26,7 @@ namespace RGmobile.Pages
 		{
 			InitializeComponent();
             ProductCollections = new ObservableCollection<ProductCollection>();
-            productCollectionService = new ProductCollectionService();
+            _productService = new ProductService();
         }
 
         protected async override void OnAppearing()
@@ -35,12 +35,12 @@ namespace RGmobile.Pages
 
             if (first)
             {
-                //var collections = await productCollectionService.GetProductCollections();
+                var collections = await _productService.GetProductCollections();
 
-                //foreach (var collection in collections)
-                //{
-                //    ProductCollections.Add(collection);
-                //}
+                foreach (var collection in collections)
+                {
+                    ProductCollections.Add(collection);
+                }
 
                 LvCollection.ItemsSource = ProductCollections;
                 BusyIndicator.IsRunning = false;

@@ -32,7 +32,7 @@ namespace RGmobile.API_Services
                 var responseValue = await response.Content.ReadAsStringAsync();
                 return responseValue;
             }
-
+            
             return null;
         }
 
