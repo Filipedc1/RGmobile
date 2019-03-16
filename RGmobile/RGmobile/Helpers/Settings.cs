@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+//OR USE Xamarin.Essentials: Secure Storage
 namespace RGmobile.Helpers
 {
     /// <summary>
@@ -30,11 +31,11 @@ namespace RGmobile.Helpers
             set => AppSettings.AddOrUpdateValue(AccessTokenKey, value);
         }
 
-        public static string UserId
-        {
-            get => AppSettings.GetValueOrDefault(UserIdKey, string.Empty);
-            set => AppSettings.AddOrUpdateValue(UserIdKey, value);
-        }
+        //public static string UserId
+        //{
+        //    get => AppSettings.GetValueOrDefault(UserIdKey, string.Empty);
+        //    set => AppSettings.AddOrUpdateValue(UserIdKey, value);
+        //}
 
         public static string UserName
         {
@@ -42,9 +43,9 @@ namespace RGmobile.Helpers
             set => AppSettings.AddOrUpdateValue(UserNameKey, value);           
         }
 
-        public static long KeyValidUntil
+        public static string KeyValidUntil
         {
-            get => AppSettings.GetValueOrDefault(KeyValidUntilKey, 0);
+            get => AppSettings.GetValueOrDefault(KeyValidUntilKey, "");
             set => AppSettings.AddOrUpdateValue(KeyValidUntilKey, value);
         }
     }

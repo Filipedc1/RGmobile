@@ -33,20 +33,30 @@ namespace RGmobile.Pages
         {
             base.OnAppearing();
 
-            if (first)
+            try
             {
-                var collections = await _productService.GetProductCollections();
-
-                foreach (var collection in collections)
+                if (first)
                 {
-                    ProductCollections.Add(collection);
+                    var collections = await _productService.GetProductCollections();
+
+                    foreach (var collection in collections)
+                    {
+                        ProductCollections.Add(collection);
+                    }
+
+                    LvCollection.ItemsSource = ProductCollections;
                 }
 
-                LvCollection.ItemsSource = ProductCollections;
+                first = false;
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            finally
+            {
                 BusyIndicator.IsRunning = false;
             }
-
-            first = false;
         }
 
         private async void LvCollection_ItemSelected(object sender, SelectedItemChangedEventArgs e)

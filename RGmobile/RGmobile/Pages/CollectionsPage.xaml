@@ -13,8 +13,6 @@
                             <Grid>
                                 <!--Binding with the propeties in the Collection class-->
                                 <Image Source="{Binding ImageUrl}" HeightRequest="200" Aspect="Fill"/>
-                                <BoxView BackgroundColor="Black" Opacity="0.4"/>
-                                <!--<Label Text="{Binding Name}" FontSize="Large" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>-->
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
