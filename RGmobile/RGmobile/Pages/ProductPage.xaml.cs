@@ -1,4 +1,5 @@
-﻿using RGmobile.Models;
+﻿using RGmobile.API_Services;
+using RGmobile.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,10 +23,10 @@ namespace RGmobile.Pages
 			InitializeComponent();
             Products = new ObservableCollection<Product>();
 
-            //foreach (var product in collection)
-            //{
-            //    Products.Add(product);
-            //}
+            foreach (var product in collection.CollectionProducts)
+            {
+                Products.Add(product.Product);
+            }
 
             LvProducts.ItemsSource = Products;
         }
