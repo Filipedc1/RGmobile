@@ -9,16 +9,20 @@ using System.Threading.Tasks;
 namespace RGmobile.API_Services
 {
     public class ProductService
-    {
-        private const string GetProductCollectionsUrl = @"https://rg-api.azurewebsites.net/api/Product/getproductcollections";
+    { 
+        private const string GetProductCollectionsForCustomersUrl = @"https://rg-api.azurewebsites.net/api/Product/getproductcollectionscustomer";
+        private const string GetProductCollectionsForSalonsUrl = @"https://rg-api.azurewebsites.net/api/Product/getproductcollectionssalon";
+        public bool isCustomer = true; //temporary
 
         //Get Request
         public async Task<List<ProductCollection>> GetProductCollections()
         {
             var client = new HttpClient();
 
+            var productCollectionsUrl = isCustomer ? GetProductCollectionsForCustomersUrl : GetProductCollectionsForSalonsUrl;
+
             //send request to server. Server will send response back in JSON format
-            var response = await client.GetAsync(GetProductCollectionsUrl);
+            var response = await client.GetAsync(productCollectionsUrl);
 
             if (response.IsSuccessStatusCode)
             {

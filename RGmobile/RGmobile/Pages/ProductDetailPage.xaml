@@ -4,10 +4,10 @@
              x:Class="RGmobile.Pages.ProductDetailPage">
     <ContentPage.Content>
         <StackLayout Padding="10,10">
-            <Image Source="{Binding Product.Image}" HeightRequest="250" WidthRequest="250"/>
+            <Image Source="{Binding Product.ImageUrl}" HeightRequest="250" WidthRequest="250"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Product.Name}" TextColor="Black" HorizontalOptions="FillAndExpand"/>
-                <Label Text="{Binding Product.Price}" TextColor="Black" FontSize="Small"/>
+                <Label Text="{Binding PriceRange}" TextColor="Black" FontSize="Small"/>
             </StackLayout>
             <Label Text="{Binding Product.Description}" FontSize="Small"/>
             <Button Text="Add To Cart" Command="{Binding AddToCartCommand}"/>

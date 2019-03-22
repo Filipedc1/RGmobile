@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
@@ -12,6 +13,8 @@ namespace RGmobile.ViewModels
     public class ProductDetailViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #region Properties
 
         private Product _product;
         public Product Product
@@ -24,7 +27,15 @@ namespace RGmobile.ViewModels
             }
         }
 
+        public string PriceRange => GetProductPriceRange();
+
+        #endregion
+
+        #region Commands
+
         public ICommand AddToCartCommand { get; private set; }
+
+        #endregion
 
         #region Constructor
 
@@ -41,7 +52,27 @@ namespace RGmobile.ViewModels
         private void AddToCart()
         {
             App.ShoppingCart.Add(_product);
-            Product = null;
+            //Product = null;
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private string GetProductPriceRange()
+        {
+            string range = string.Empty;
+
+            if (Product.CustomerPrices.Any())
+            {
+                range = $"${Product.CustomerPrices.First().Cost} - ${Product.CustomerPrices.Last().Cost}";
+            }
+            else if (Product.SalonPrices.Any())
+            {
+                range = $"${Product.SalonPrices.First()} - ${Product.SalonPrices.Last()}";
+            }
+
+            return range;
         }
 
         #endregion
