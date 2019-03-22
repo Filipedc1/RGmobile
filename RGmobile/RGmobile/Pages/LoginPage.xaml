@@ -5,15 +5,35 @@
              x:Class="RGmobile.Pages.LoginPage">
 
 
-    
-    <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="20" VerticalOptions="Center">
-            <Entry Placeholder="Username" Text="{Binding UserName}"/>
-            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
-            <Button Text="Login" TextColor="White" BackgroundColor="#515151" 
-                    Command="{Binding LoginCommand}" CommandParameter="{Binding .}">
-            </Button>
-            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="#FF5722" IsRunning="{Binding IsBusy}"/>
-        </StackLayout>
-    </ContentPage.Content>
+    <ContentPage.Resources>
+        <StyleSheet Source="../Styles/LoginPage.css"/>
+    </ContentPage.Resources>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <FlexLayout class="body" x:Name="Form">
+            <FlexLayout x:Name="LoginForm" class="login-container">
+                <Label Text="Login" class="logo"/>
+                <FlexLayout class="login-form">
+                    <Entry Text="{Binding UserName}" Placeholder="Username"/>
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
+                    <Button Text="Login" TextColor="White" BackgroundColor="#515151" 
+                        Command="{Binding LoginCommand}" CommandParameter="{Binding .}">
+                    </Button>
+
+                    <StackLayout Orientation="Horizontal" IsVisible="True" Margin="50,10">
+                        <Label Text="Remember Me: "/>
+                        <Switch IsToggled="{Binding RememberMe}"/>
+                    </StackLayout>
+                </FlexLayout>
+            </FlexLayout>
+        </FlexLayout>
+        
+        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" Color="#FF5722" IsRunning="{Binding IsBusy}"/>
+    </Grid>
 </ContentPage>
+
