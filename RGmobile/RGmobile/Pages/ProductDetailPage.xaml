@@ -10,7 +10,7 @@
                 <Label Text="{Binding PriceRange}" TextColor="Black" FontSize="Small"/>
             </StackLayout>
             <Label Text="{Binding Product.Description}" FontSize="Small"/>
-            <Button Text="Add To Cart" Command="{Binding AddToCartCommand}"/>
+            <Button Text="Add To Cart" Command="{Binding AddToCartCommand}" BackgroundColor="#e11383" TextColor="White"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
