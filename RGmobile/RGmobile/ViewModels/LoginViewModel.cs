@@ -1,5 +1,7 @@
-﻿using RGmobile.API_Services;
+﻿using Microsoft.IdentityModel.Tokens;
+using RGmobile.API_Services;
 using RGmobile.Helpers;
+using RGmobile.Models;
 using RGmobile.Pages;
 using System;
 using System.Collections.Generic;
@@ -76,50 +78,57 @@ namespace RGmobile.ViewModels
         {
             IsBusy = true;
 
-            string token = await _accountService.Login(model);
+            var token = await _accountService.Login(model);
 
-            if (string.IsNullOrEmpty(token))
+            if (token == null)
             {
                 IsBusy = false;
                 await App.Current.MainPage.DisplayAlert("Login Failure", "Invalid credentials", "Ok");
                 return;
             }
 
-            //await FinishLogin(token, model.UserName);
+            await FinishLogin(token, model.UserName);
+        }
+
+        //Need to finish this later. Keep simple login for now and just build out the app.
+        public async Task FinishLogin(JwtSecurityToken token, string username)
+        {
+            Settings.AccessToken = token.RawData;
+
+            var claims = token.Claims.ToList();
+
+            string expires = claims.FirstOrDefault(x => x.Type == "exp").Value;
+
+            long.TryParse(expires, out long time);
+            long nextTime = DateTime.Now.AddSeconds(time).Ticks;
+            
+            Settings.KeyValidUntil = nextTime.ToString();
+            Settings.UserName = username;
+
+            string role = claims.FirstOrDefault(x => x.Type.Contains("role")).Value;
+            App.UserRole = GetUserRole(role);
 
             IsBusy = false;
 
             await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
         }
 
-        //Need to finish this later. Keep simple login for now and just build out the app.
-        public async Task FinishLogin(string access_token, string username)
+        #endregion
+
+        #region Helpers
+
+        private RoleType? GetUserRole(string role)
         {
-            Settings.AccessToken = access_token;
+            RoleType? userRole = null;
 
-            var decodedToken = new JwtSecurityToken(access_token);
-            var claims = decodedToken.Claims.ToList();
+            switch (role)
+            {
+                case "Customer":  userRole = RoleType.Customer;  break;
+                case "Salon":     userRole = RoleType.Salon;     break;
+                case "Admin":     userRole = RoleType.Admin;     break;
+            }
 
-            string expires = claims.FirstOrDefault(x => x.Type == "exp").Value;
-
-            long.TryParse(expires, out long time);
-            long nextTime = DateTime.Now.AddSeconds(time).Ticks;
-            Settings.KeyValidUntil = nextTime;
-
-            //try
-            //{
-            //    var user = await _userService.GetUserByUsername(username);
-            //    Settings.UserId = user.Id.ToString();
-            //    Settings.UserName = user.Name ?? string.Empty;
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
-
-            //IsBusy = false;
-
-            //await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
+            return userRole;
         }
 
         #endregion

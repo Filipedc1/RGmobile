@@ -1,0 +1,40 @@
+﻿
+.login-container {
+    background-color: #f6f6f6;
+    width: 300;
+    height: 340;
+    flex-direction: column;
+    margin-top: -30;
+    color: black;
+}
+
+
+.body {
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: white;
+}
+
+.login-form {
+    height: 260;
+    flex-direction: column;
+    margin-top: 20;
+}
+
+.logo {
+    font-size: 20;
+    margin-top: 40;
+    text-align: center;
+}
+
+entry {
+    height: 50;
+    margin: 10 20 0;
+    color: #333;
+}
+
+button {
+    background-color: #0c0f10;
+    margin: 25 20 0;
+}

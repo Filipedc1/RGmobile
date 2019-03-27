@@ -10,7 +10,7 @@
                     <ViewCell>
                         <Grid>
                             <!--Binding with the propeties in the Collection class-->
-                            <Image Source="{Binding Image}" HeightRequest="200" Aspect="Fill"/>
+                            <Image Source="{Binding ImageUrl}" HeightRequest="200" Aspect="AspectFit"/>
                             <BoxView BackgroundColor="Black" Opacity="0.4"/>
                             <StackLayout VerticalOptions="End" Margin="5">
                                 <Label Text="{Binding Name}" FontSize="Large" TextColor="Yellow"/>
