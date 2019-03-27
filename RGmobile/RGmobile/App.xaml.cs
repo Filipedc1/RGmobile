@@ -1,5 +1,6 @@
 ﻿using RGmobile.Models;
 using RGmobile.Pages;
+using RGmobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
@@ -10,7 +11,8 @@ namespace RGmobile
 {
     public partial class App : Application
     {
-        public static List<Product> ShoppingCart { get; set; } = new List<Product>();
+        public static List<ProductViewModel> ShoppingCart { get; set; } = new List<ProductViewModel>();
+        public static RoleType? UserRole { get; set; } //temporary
 
         public App()
         {

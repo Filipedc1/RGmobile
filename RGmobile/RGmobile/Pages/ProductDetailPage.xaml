@@ -10,7 +10,28 @@
                 <Label Text="{Binding PriceRange}" TextColor="Black" FontSize="Small"/>
             </StackLayout>
             <Label Text="{Binding Product.Description}" FontSize="Small"/>
-            <Button Text="Add To Cart" Command="{Binding AddToCartCommand}" BackgroundColor="#e11383" TextColor="White"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker Title="Select Size" HorizontalOptions="Start"
+                        ItemsSource="{Binding Product.CustomerPrices}" 
+                        ItemDisplayBinding="{Binding Size}" 
+                        SelectedItem="{Binding SelectedSize}" />
+                <Label Text="{Binding Cost}" 
+                       FontSize="Large" 
+                       FontAttributes="Bold" 
+                       TextColor="Black"
+                       HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Quantity" 
+                       Text="{Binding Quantity}" 
+                       HorizontalOptions="Start" 
+                       Keyboard="Numeric"/>
+                <Button Text="Add To Cart" 
+                        BackgroundColor="#e11383" 
+                        TextColor="White" 
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding AddToCartCommand}" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

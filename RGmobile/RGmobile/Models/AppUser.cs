@@ -4,6 +4,8 @@ using System.Text;
 
 namespace RGmobile.Models
 {
+    public enum RoleType { Customer, Salon, Admin }
+
     public class AppUser
     {
         public string ProfileImageUrl { get; set; }

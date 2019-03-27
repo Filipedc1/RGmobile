@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using RGmobile.API_Services;
 using RGmobile.Helpers;
+using RGmobile.Models;
 using RGmobile.Pages;
 using System;
 using System.Collections.Generic;
@@ -104,9 +105,30 @@ namespace RGmobile.ViewModels
             Settings.KeyValidUntil = nextTime.ToString();
             Settings.UserName = username;
 
+            string role = claims.FirstOrDefault(x => x.Type.Contains("role")).Value;
+            App.UserRole = GetUserRole(role);
+
             IsBusy = false;
 
             await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private RoleType? GetUserRole(string role)
+        {
+            RoleType? userRole = null;
+
+            switch (role)
+            {
+                case "Customer":  userRole = RoleType.Customer;  break;
+                case "Salon":     userRole = RoleType.Salon;     break;
+                case "Admin":     userRole = RoleType.Admin;     break;
+            }
+
+            return userRole;
         }
 
         #endregion
