@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using RGmobile.API_Services;
 using RGmobile.Helpers;
+using RGmobile.Interfaces;
 using RGmobile.Models;
 using RGmobile.Pages;
 using System;
@@ -16,24 +17,10 @@ using Xamarin.Forms;
 
 namespace RGmobile.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private AccountService _accountService;
         private UserService _userService;
-
-
-        private bool isBusy = false;
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set
-            {
-                isBusy = value;
-                OnPropertyChanged();
-            }
-        }
 
         private string username;
         public string UserName
@@ -110,7 +97,7 @@ namespace RGmobile.ViewModels
 
             IsBusy = false;
 
-            await App.Current.MainPage.Navigation.PushAsync(new HomePage(token));
+            await _navigationService.NavigateToHome(token);
         }
 
         #endregion
@@ -132,10 +119,5 @@ namespace RGmobile.ViewModels
         }
 
         #endregion
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

@@ -4,7 +4,10 @@
              x:Class="RGmobile.Pages.ProductPage">
 
     <ContentPage.Content>
-        <ListView SeparatorVisibility="None" HasUnevenRows="True" x:Name="LvProducts" ItemSelected="LvProducts_ItemSelected">
+        <ListView ItemsSource="{Binding Products}" 
+                  SeparatorVisibility="None" 
+                  HasUnevenRows="True" 
+                  ItemSelected="LvProducts_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

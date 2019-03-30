@@ -1,5 +1,6 @@
 ﻿using RGmobile.API_Services;
 using RGmobile.Models;
+using RGmobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,19 +17,10 @@ namespace RGmobile.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ProductPage : ContentPage
 	{
-        public ObservableCollection<Product> Products;
-
         public ProductPage (ProductCollection collection)
 		{
 			InitializeComponent();
-            Products = new ObservableCollection<Product>();
-
-            foreach (var product in collection.CollectionProducts)
-            {
-                Products.Add(product.Product);
-            }
-
-            LvProducts.ItemsSource = Products;
+            this.BindingContext = new ProductsViewModel(collection);
         }
 
         private async void LvProducts_ItemSelected(object sender, SelectedItemChangedEventArgs e)

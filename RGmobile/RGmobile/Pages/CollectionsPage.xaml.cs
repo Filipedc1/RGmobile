@@ -1,5 +1,6 @@
 ﻿using RGmobile.API_Services;
 using RGmobile.Models;
+using RGmobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,47 +17,26 @@ namespace RGmobile.Pages
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CollectionsPage : ContentPage
 	{
-        public ObservableCollection<ProductCollection> ProductCollections;
-        private ProductService _productService;
-
         //using this to prevent api to get called everytime you click Menus tab
         public static bool first = true;
+
+        ProductCollectionsViewModel VM { get; set; }
 
         public CollectionsPage ()
 		{
 			InitializeComponent();
-            ProductCollections = new ObservableCollection<ProductCollection>();
-            _productService = new ProductService();
+            this.VM = new ProductCollectionsViewModel();
+            this.BindingContext = this.VM;
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            try
-            {
-                if (first)
-                {
-                    var collections = await _productService.GetProductCollections();
+            if (first)
+                this.VM.LoadProductCollectionsCommand.Execute(null);
 
-                    foreach (var collection in collections)
-                    {
-                        ProductCollections.Add(collection);
-                    }
-
-                    LvCollection.ItemsSource = ProductCollections;
-                }
-
-                first = false;
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                BusyIndicator.IsRunning = false;
-            }
+            first = false;
         }
 
         private async void LvCollection_ItemSelected(object sender, SelectedItemChangedEventArgs e)

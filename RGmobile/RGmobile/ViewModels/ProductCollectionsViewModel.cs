@@ -11,22 +11,20 @@ using Xamarin.Forms;
 
 namespace RGmobile.ViewModels
 {
-    public class ProductCollectionsViewModel : INotifyPropertyChanged
+    public class ProductCollectionsViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ObservableCollection<ProductCollection> ProductCollections;
         private ProductService _productService;
 
         public Command LoadProductCollectionsCommand { get; private set; }
 
-        private bool isBusy = false;
-        public bool IsBusy
+
+        public ObservableCollection<ProductCollection> _productCollections;
+        public ObservableCollection<ProductCollection> ProductCollections
         {
-            get { return isBusy; }
+            get => _productCollections;
             set
             {
-                isBusy = value;
+                _productCollections = value;
                 OnPropertyChanged();
             }
         }
@@ -75,11 +73,5 @@ namespace RGmobile.ViewModels
         }
 
         #endregion
-
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

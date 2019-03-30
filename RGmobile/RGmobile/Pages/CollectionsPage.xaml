@@ -6,7 +6,7 @@
 
     <ContentPage.Content>
         <Grid>
-            <ListView SeparatorVisibility="None" HasUnevenRows="True" x:Name="LvCollection" ItemSelected="LvCollection_ItemSelected">
+            <ListView ItemsSource="{Binding ProductCollections}" SeparatorVisibility="None" HasUnevenRows="True" ItemSelected="LvCollection_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -18,7 +18,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ActivityIndicator x:Name="BusyIndicator" HorizontalOptions="Center" VerticalOptions="Center" Color="#FF5722" IsRunning="True"/>
+            <ActivityIndicator x:Name="BusyIndicator" HorizontalOptions="Center" VerticalOptions="Center" Color="#FF5722" IsRunning="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

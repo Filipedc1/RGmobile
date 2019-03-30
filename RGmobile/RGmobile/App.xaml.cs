@@ -1,4 +1,5 @@
-﻿using RGmobile.Models;
+﻿using RGmobile.API_Services;
+using RGmobile.Models;
 using RGmobile.Pages;
 using RGmobile.ViewModels;
 using System;
@@ -17,8 +18,14 @@ namespace RGmobile
         public App()
         {
             InitializeComponent();
+            RegisterServices();
 
             MainPage = new NavigationPage(new LoginPage());
+        }
+
+        private void RegisterServices()
+        {
+            DependencyService.Register<NavigationService>();
         }
 
         protected override void OnStart()
