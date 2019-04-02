@@ -26,12 +26,13 @@ namespace RGmobile.ViewModels
             }
         }
 
+        //public Command ItemSelectedCommand { get; private set; }
+
         #region Constructor
 
         public ProductsViewModel(ProductCollection collection)
         {
             _productService = new ProductService();
-
             Products = new ObservableCollection<Product>();
 
             foreach (var product in collection.CollectionProducts)
@@ -43,7 +44,6 @@ namespace RGmobile.ViewModels
         #endregion
 
         #region Methods
-
 
 
         #endregion

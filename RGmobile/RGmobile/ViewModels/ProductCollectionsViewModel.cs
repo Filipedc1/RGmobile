@@ -48,10 +48,10 @@ namespace RGmobile.ViewModels
             if (IsBusy)
                 return;
 
+            IsBusy = true;
+
             try
             {
-                IsBusy = true;
-
                 var collections = await _productService.GetProductCollections();
 
                 if (collections != null && collections.Count > 0)

@@ -1,71 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RGmobile.Pages.ProductPage">
+             x:Class="RGmobile.Pages.ProductPage"
+             Title="Products">
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Products}" 
-                  SeparatorVisibility="None" 
-                  HasUnevenRows="True" 
-                  ItemSelected="LvProducts_ItemSelected">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <!--Binding with the propeties in the Collection class-->
-                            <Image Source="{Binding ImageUrl}" HeightRequest="200" Aspect="AspectFit"/>
-                            <BoxView BackgroundColor="Black" Opacity="0.4"/>
-                            <StackLayout VerticalOptions="End" Margin="5">
-                                <Label Text="{Binding Name}" FontSize="Large" TextColor="Yellow"/>
-                                <Label Text="{Binding Price}" FontSize="Medium" TextColor="White"/>
-                                <Label Text="{Binding Description}" FontSize="Small" TextColor="White"/>
-                            </StackLayout>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </ContentPage.Content>
-</ContentPage>
-
-
-
-<!--Works but need to figure out how to tap on an item and go to the detail page.-->
-<!--<Grid>
-    <ScrollView>
-        <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
+        <Grid>
+            <ScrollView>
+                <FlexLayout BindableLayout.ItemsSource="{Binding Products}" 
                        Wrap="Wrap"
                        Direction="Row"
                        JustifyContent="Start"
                        AlignItems="Start"
                        AlignContent="Start"
                        Padding="8">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="4,4,4,4"
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="4,4,4,4"
                                   FlexLayout.Basis="{OnIdiom Phone='50%', Tablet='33%'}"
                                   FlexLayout.AlignSelf="Start">
-                        <Frame 
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="Product_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Frame 
                                     Padding="0"
                                     VerticalOptions="Start"
                                     HasShadow="{OnPlatform Android=true, iOS=false}">
-                            <Grid Padding="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="200"/>
-                                <Label Grid.Row="1" Margin="10,0" Text="{Binding Name}"/>
+                                    <Grid Padding="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="200"/>
+                                        <Label Grid.Row="1" Margin="10,0" Text="{Binding Name}"/>
+                                    </Grid>
+                                </Frame>
                             </Grid>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </FlexLayout>
-    </ScrollView>
-    <ActivityIndicator 
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </ScrollView>
+            <ActivityIndicator 
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand"/>
-</Grid>-->
+                           HorizontalOptions="CenterAndExpand"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+

@@ -23,16 +23,12 @@ namespace RGmobile.Pages
             this.BindingContext = new ProductsViewModel(collection);
         }
 
-        private async void LvProducts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void Product_Tapped(object sender, EventArgs e)
         {
-            var selectedItem = e.SelectedItem as Product;
-
-            if (selectedItem != null)
+            if (sender is View view && view.BindingContext is Product product)
             {
-                await Navigation.PushAsync(new ProductDetailPage(selectedItem));
+                await Navigation.PushAsync(new ProductDetailPage(product));
             }
-
-            ((ListView)sender).SelectedItem = null;
         }
     }
 }
