@@ -7,7 +7,7 @@
             <Image Source="{Binding Product.ImageUrl}" HeightRequest="250" WidthRequest="250"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Product.Name}" TextColor="Black" HorizontalOptions="FillAndExpand"/>
-                <Label Text="{Binding PriceRange}" TextColor="Black" FontSize="Small"/>
+                <Label Text="{Binding Product.PriceRange}" TextColor="Black" FontSize="Small"/>
             </StackLayout>
             <Label Text="{Binding Product.Description}" FontSize="Small"/>
             <StackLayout Orientation="Horizontal">

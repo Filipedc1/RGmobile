@@ -63,9 +63,6 @@ namespace RGmobile.ViewModels
             }
         }
 
-
-        public string PriceRange => GetProductPriceRange();
-
         #endregion
 
         #region Commands
@@ -109,26 +106,6 @@ namespace RGmobile.ViewModels
             };
 
             ShoppingCartHelper.AddToCart(productVM);
-        }
-
-        #endregion
-
-        #region Helpers
-
-        private string GetProductPriceRange()
-        {
-            string range = string.Empty;
-
-            if (App.UserRole == RoleType.Customer)
-            {
-                range = $"${Product.CustomerPrices.FirstOrDefault().Cost} - ${Product.CustomerPrices.LastOrDefault().Cost}";
-            }
-            else if (App.UserRole == RoleType.Salon)
-            {
-                range = $"${Product.SalonPrices.FirstOrDefault()} - ${Product.SalonPrices.LastOrDefault()}";
-            }
-
-            return range ?? "N/A";
         }
 
         #endregion

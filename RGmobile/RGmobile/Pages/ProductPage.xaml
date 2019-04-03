@@ -30,9 +30,11 @@
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Image Source="{Binding ImageUrl}" Aspect="AspectFill" HeightRequest="200"/>
-                                        <Label Grid.Row="1" Margin="10,0" Text="{Binding Name}"/>
+                                        <Label Grid.Row="1" Text="{Binding Name}" TextColor="Black" HorizontalTextAlignment="Center"/>
+                                        <Label Grid.Row="2" Text="{Binding PriceRange}" TextColor="Red" HorizontalTextAlignment="Center"/>
                                     </Grid>
                                 </Frame>
                             </Grid>
