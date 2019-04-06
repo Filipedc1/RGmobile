@@ -74,11 +74,11 @@ namespace RGmobile.ViewModels
                 return;
             }
 
-            await FinishLogin(token, model.UserName);
+            FinishLogin(token, model.UserName);
         }
 
         //Need to finish this later. Keep simple login for now and just build out the app.
-        public async Task FinishLogin(JwtSecurityToken token, string username)
+        public void FinishLogin(JwtSecurityToken token, string username)
         {
             Settings.AccessToken = token.RawData;
 
@@ -97,7 +97,7 @@ namespace RGmobile.ViewModels
 
             IsBusy = false;
 
-            await _navigationService.NavigateToHome(token);
+            _navigationService.NavigateToHome(token);
         }
 
         #endregion

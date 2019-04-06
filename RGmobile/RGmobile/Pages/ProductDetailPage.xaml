@@ -15,23 +15,22 @@
                         ItemsSource="{Binding Product.CustomerPrices}" 
                         ItemDisplayBinding="{Binding Size}" 
                         SelectedItem="{Binding SelectedSize}" />
+                <Entry Placeholder="Quantity" 
+                       Text="{Binding Quantity}" 
+                       HorizontalOptions="Start" 
+                       Keyboard="Numeric"/>
                 <Label Text="{Binding Cost}" 
                        FontSize="Large" 
                        FontAttributes="Bold" 
                        TextColor="Black"
                        HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Entry Placeholder="Quantity" 
-                       Text="{Binding Quantity}" 
-                       HorizontalOptions="Start" 
-                       Keyboard="Numeric"/>
-                <Button Text="Add To Cart" 
-                        BackgroundColor="#e11383" 
-                        TextColor="White" 
-                        HorizontalOptions="FillAndExpand"
-                        Command="{Binding AddToCartCommand}" />
-            </StackLayout>
+            <Button Text="Add To Cart" 
+                    BackgroundColor="#e11383" 
+                    TextColor="White" 
+                    HorizontalOptions="FillAndExpand"
+                    Command="{Binding AddToCartCommand}" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.IO;
+using ImageCircle.Forms.Plugin.Droid;
 
 namespace RGmobile.Droid
 {
@@ -21,6 +22,7 @@ namespace RGmobile.Droid
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            ImageCircleRenderer.Init();
 
             LoadApplication(new App());
         }

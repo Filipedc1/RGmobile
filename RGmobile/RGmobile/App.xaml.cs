@@ -20,7 +20,7 @@ namespace RGmobile
             InitializeComponent();
             RegisterServices();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new LoginPage();
         }
 
         private void RegisterServices()

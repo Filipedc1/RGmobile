@@ -10,6 +10,6 @@ namespace RGmobile.Interfaces
     {
         //Task NavigateToLogin();
         //Task NavigateToRegister();
-        Task NavigateToHome(JwtSecurityToken token);
+        void NavigateToHome(JwtSecurityToken token);
     }
 }
