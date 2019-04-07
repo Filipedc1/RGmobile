@@ -12,7 +12,7 @@
                         <ViewCell>
                             <Grid>
                                 <!--Binding with the propeties in the Collection class-->
-                                <Image Source="{Binding ImageUrl}" HeightRequest="200" Aspect="AspectFill"/>
+                                <Image Source="{Binding ImageUrl}" HeightRequest="250" Aspect="AspectFill"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

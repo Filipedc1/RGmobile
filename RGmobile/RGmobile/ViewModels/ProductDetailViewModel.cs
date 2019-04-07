@@ -11,10 +11,8 @@ using Xamarin.Forms;
 
 namespace RGmobile.ViewModels
 {
-    public class ProductDetailViewModel : INotifyPropertyChanged
+    public class ProductDetailViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         #region Properties
 
         private Product _product;
@@ -109,10 +107,5 @@ namespace RGmobile.ViewModels
         }
 
         #endregion
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

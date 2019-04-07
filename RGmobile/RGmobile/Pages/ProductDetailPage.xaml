@@ -14,11 +14,13 @@
                 <Picker Title="Select Size" HorizontalOptions="Start"
                         ItemsSource="{Binding Product.CustomerPrices}" 
                         ItemDisplayBinding="{Binding Size}" 
-                        SelectedItem="{Binding SelectedSize}" />
+                        SelectedItem="{Binding SelectedSize}" 
+                        WidthRequest="115"/>
                 <Entry Placeholder="Quantity" 
                        Text="{Binding Quantity}" 
                        HorizontalOptions="Start" 
-                       Keyboard="Numeric"/>
+                       Keyboard="Numeric" 
+                       WidthRequest="115"/>
                 <Label Text="{Binding Cost}" 
                        FontSize="Large" 
                        FontAttributes="Bold" 
