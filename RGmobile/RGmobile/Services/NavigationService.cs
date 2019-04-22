@@ -16,6 +16,11 @@ namespace RGmobile.API_Services
             App.Current.MainPage = new NavigationPage(new HomePage(token));
         }
 
+        public async Task NavigateToShoppingCart()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new ShoppingCartPage());
+        }
+
         //public async Task NavigateToLogin()
         //{
         //    throw new NotImplementedException();

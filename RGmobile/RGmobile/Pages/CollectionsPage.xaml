@@ -4,6 +4,10 @@
              x:Class="RGmobile.Pages.CollectionsPage"
              Title="Products">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="cart.png" Command="{Binding GoToShoppingCartCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <Grid>
             <ListView ItemsSource="{Binding ProductCollections}" SeparatorVisibility="None" HasUnevenRows="True" ItemSelected="LvCollection_ItemSelected">

@@ -13,6 +13,7 @@ namespace RGmobile
     public partial class App : Application
     {
         public static List<ProductViewModel> ShoppingCart { get; set; } = new List<ProductViewModel>();
+        public static AppUser CurrentUser { get; set; }
         public static RoleType? UserRole { get; set; } //temporary
 
         public App()

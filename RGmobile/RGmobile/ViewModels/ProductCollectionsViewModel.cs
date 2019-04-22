@@ -16,6 +16,7 @@ namespace RGmobile.ViewModels
         private ProductService _productService;
 
         public Command LoadProductCollectionsCommand { get; private set; }
+        public Command GoToShoppingCartCommand { get; private set; }
 
 
         public ObservableCollection<ProductCollection> _productCollections;
@@ -37,6 +38,7 @@ namespace RGmobile.ViewModels
             ProductCollections = new ObservableCollection<ProductCollection>();
 
             LoadProductCollectionsCommand = new Command(async () => await LoadProductCollections());
+            GoToShoppingCartCommand = new Command(async () => await GoToShoppingCartPage());
         }
 
         #endregion
@@ -70,6 +72,13 @@ namespace RGmobile.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private async Task GoToShoppingCartPage()
+        {
+            if (IsBusy) return;
+
+            await _navigationService.NavigateToShoppingCart();
         }
 
         #endregion
